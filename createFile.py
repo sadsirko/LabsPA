@@ -19,8 +19,9 @@ def createF(fName,size):
             file.write(strok )
             strok = ''
             if a != file_size(fName):
-                print(file_size(fName))
                 a = file_size(fName)
+                if a % 10 == 0:
+                    print(a)
                 if a == size:
                     break
 
