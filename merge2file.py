@@ -1,5 +1,9 @@
 import os
 
+def toStr(arr):
+    str1 = " "
+    return(str1.join(arr))
+
 def merge2ser(str1,str2):
     str1 = str(str1)[:-2].split(' ')
     str2 = str(str2)[:-2].split(' ')
@@ -7,14 +11,18 @@ def merge2ser(str1,str2):
     #arr1 = str1.split(' ')
     #arr2 = str2.split(' ')
     Ind1, Ind2 = 0, 0
-    print(str1)
-    print(str2)
+    #print( str1)
+    #print( str2)
+    if str1 == ['']: 
+        return toStr(str2)
+    elif str2 == ['']:
+        return toStr(str1)        
     a = len(str1) > 1 or len(str2) > 1
     while a :
-        if str1 == []:
+        if   len(str1) == 0 :
             strRes = strRes + str2
             break
-        elif str2 == []:
+        elif  len(str2) == 0 :
             strRes = strRes + str1
             break
         f = str(str1[0])
@@ -25,8 +33,8 @@ def merge2ser(str1,str2):
         elif int(s) < int(f):
             strRes.append(s)
             str2.pop(0)
-        a = len(str1) > 1 or len(str2) > 1
-    return strRes       
+        a = len(str1) >= 1 or len(str2) >= 1
+    return toStr(strRes)       
         
 
     
@@ -39,10 +47,22 @@ def merge2filesto3(fName1,fName2,fName3):
         Ind2 = 0
         a = Ind1 < len(arr1) and Ind2 < len(arr2)
         while  a :
-            print (merge2ser(arr1[Ind1],arr2[Ind2]))
+            fileOut.write(merge2ser(arr1[Ind1],arr2[Ind2]) + '\n')
             Ind1 += 1 
             Ind2 += 1
-            a = Ind1 < len(arr1) and Ind2 < len(arr2)
+            a = Ind1 < len(arr1) and Ind2 < len(arr2)        
+        
+    # deleting of used series
+    f = open(fName1).readlines()
+    g = open(fName2).readlines()
+    for i in range(0,Ind1 - 1):
+        f.pop(0)
+        g.pop(0)
+    with open(fName1,'w') as F1, open(fName2,'w') as F2:
+        F1.writelines(f)
+        F2.writelines(g)
+   
+
 
 merge2filesto3('ser1.txt','ser2.txt','serJoined.txt')
 
