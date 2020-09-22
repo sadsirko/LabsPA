@@ -8,5 +8,5 @@ def fibonacci(n):
         a = b
         b = c
         count += 1 
-    return b - a , a, b    
-print(fibonacci(25))    
+    return b - a , a, b , count   
+print(fibonacci(6615377))    
