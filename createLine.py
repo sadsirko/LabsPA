@@ -42,8 +42,6 @@ def createSeries(fName1,fName2):
             if(sc == '') : 
                 break
     return countOfSeries           
-#createFile.createF('file1.txt',100)
-
 
 # There we distribute one file on two with fib numbers
 def create2Files(fNameIn,fNameI,fNameII,series):
@@ -63,10 +61,6 @@ def create2Files(fNameIn,fNameI,fNameII,series):
         F1.writelines(f)
         F2.writelines(s)
 
-
-series = (createSeries('test.txt','fileOut.txt'))
-create2Files('fileOut.txt','ser1.txt','ser2.txt',series)
-
 def fibMerge(fName1,fName2,fName3):
     with open(fName1, "r") as file1, open (fName2, "r") as file2, open (fName3, "r") as file3 :
         merge2file.merge2filesto3(fName1, fName2, fName3)
@@ -80,25 +74,18 @@ def fibMerge(fName1,fName2,fName3):
                 merge2file.merge2filesto3(fName3, fName1, fName2 )
             elif c :
                 merge2file.merge2filesto3(fName1, fName2, fName3 )
-            a = file1.read() == ''
-            b = file2.read() == ''
-            c = file3.read() == ''
-            print(a,b,c)
+            with open(fName1, "r") as file1, open (fName2, "r") as file2, open (fName3, "r") as file3 :
+                a = file1.read() == ''
+                b = file2.read() == ''
+                c = file3.read() == ''
+            fS = os.stat(fName1).st_size
+            sS = os.stat(fName2).st_size
+            tS = os.stat(fName3).st_size
+            #print(fS,sS,tS)
 
+createFile.createF('test.txt',10)
+series = (createSeries('test.txt','fileOut.txt'))
+create2Files('fileOut.txt','ser1.txt','ser2.txt',series)
 fibMerge('ser1.txt','ser2.txt','serJoined.txt')
-#for i in range(0,10):
- #   print('merge')
-#merge2file.merge2filesto3('ser1.txt','ser2.txt','serJoined.txt' )
-#merge2file.merge2filesto3('serJoined.txt','ser1.txt','ser2.txt' )
-#merge2file.merge2filesto3('ser2.txt','serJoined.txt','ser1.txt' )
-with open('serJoined.txt', "r") as file1:
-    print(file1.read() == '')
-
-#merge2file.merge2filesto3('ser1.txt','ser2.txt','serJoined.txt' )
-#merge2file.merge2filesto3('serJoined.txt','ser1.txt','ser2.txt' )
-#merge2file.merge2filesto3('ser2.txt','serJoined.txt','ser1.txt' )
-     
-#merge2file.merge2filesto3('ser1.txt','ser2.txt','serJoined.txt' )
-#merge2file.merge2filesto3('serJoined.txt','ser1.txt','ser2.txt' )
 
        

@@ -4,7 +4,7 @@ import os
 def file_size(fPath):
         fInfo = os.stat(fPath)
         return round(fInfo.st_size / 1048576)
-        
+
 def createF(fName,size):
 
     with open(fName, "w") as file:
@@ -22,7 +22,7 @@ def createF(fName,size):
                 a = file_size(fName)
                 if a % 10 == 0:
                     print(a)
-                if a == size:
+                if a >= size:
                     break
 
 
