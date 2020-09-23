@@ -1,15 +1,15 @@
 import random
 import os
 
-def createF(fName,size):
-    def file_size(fPath):
+def file_size(fPath):
         fInfo = os.stat(fPath)
         return round(fInfo.st_size / 1048576)
-
+        
+def createF(fName,size):
 
     with open(fName, "w") as file:
         a = 0
-        strok = ' '
+        strok = ''
         while True:
             for i in range(1,7):
                 b = str(random.randint(0, 1000000)) 
@@ -25,4 +25,6 @@ def createF(fName,size):
                 if a == size:
                     break
 
+
+#createF('test.txt',1)
 
