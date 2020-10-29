@@ -112,6 +112,7 @@ class Generation:
             #check if it already exist in decisions
             k = 0
             already_exist = False
+
             while k < len(self.population):
                 if new_arr == self.population[k].gen:
                     already_exist = True
@@ -123,6 +124,7 @@ class Generation:
                 self.population.append(Decision(self.quantity))
                 self.population[len(self.population) - 1].new_gen(new_arr)
                 self.population[len(self.population) - 1].find_klika()
+
                 # if self.population[len(self.population) - 1].klika_num >= 4:
                 #self.show_full_pop()
                 #print(self.population[len(self.population) - 1].show_as_norm())
