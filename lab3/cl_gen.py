@@ -18,7 +18,7 @@ class Decision:
                 self.gen.append(0)
             else:
                 self.gen.append(1)
-        print(self.gen)
+        #print(self.gen)
 #updated
 
 
@@ -30,7 +30,7 @@ class Decision:
         for i in pair_arr:
             if cnt == ran_num:
                 pair = i
-
+            cnt += 1
         for i in range(0, self.quantity):
             if i != num and i != pair :
                 self.gen.append(0)
@@ -41,9 +41,9 @@ class Decision:
         self.gen = new_gen
 
     def find_klika(self):
-        for i in self.gen:
-            if i == 1:
-                self.klika_num += 1
+        self.klika_num = 0
+        for i in self.show_as_norm():
+            self.klika_num += 1
 
     def show_as_norm(self):
         loc = []
@@ -60,7 +60,7 @@ class Generation:
         self.quantity = quantity
         self.population = []
         self.graph = G
-        self.kliks = []
+        self.kliks = [[],[],[],[],[],[],[],[],[],[],[]]
         self.m_chance = chance_mutation
 
     def first_gen_cr(self):
@@ -105,10 +105,10 @@ class Generation:
                 elif a == 2:
                     new_arr.append(self.population[sec_id].gen[i])
                 i += 1
-            #new_arr = self.mutation(new_arr, self.m_chance)
-            print(new_arr)
-            new_arr = self.mutation_update(new_arr, self.m_chance)
-            print(new_arr)
+            #print(new_arr)
+            #new_arr = self.mutation_update(new_arr, self.m_chance)
+            new_arr = self.mutation(new_arr, self.m_chance)
+            #print(new_arr)
             #check if it already exist in decisions
             k = 0
             already_exist = False
@@ -132,18 +132,14 @@ class Generation:
     def find_kliks(self):
         loc = self.quantity
         max_klika = 0
+
         for i in self.population:
-            #print(i.show_as_norm())
-            #don't check first population
-            if loc < 0:
-                i.find_klika()
-                if max_klika < i.klika_num:
-                    max_klika = i.klika_num
-                    self.kliks.append(i.show_as_norm())
-                    #print('normis', i.show_as_norm())
-                    #loc_len = len(self.kliks) - 1
-                    #self.kliks[loc_len].append(i.klika_num)
-            loc -= 1
+            i.find_klika()
+            if max_klika < i.klika_num:
+                max_klika = i.klika_num
+            self.kliks[i.klika_num].append(i.show_as_norm())
+
+
 # usual mutation
 
     def mutation(self, arr, percent):
@@ -192,75 +188,14 @@ class Generation:
                 else:
                     new.append(0)
                 cnt3 += 1
-            return new
+            if self.is_alive(new):
+                return new
+            else:
+                return old
         else:
             return old
-    # cnt2 = 0
-        # pair = 0
-        # for i in pair_arr:
-        #     if cnt2 == ran_num:
-        #         pair = i
-        #     cnt2 += 1
-        # for i in range(0, self.quantity):
-        #     if not (i in arr_for_rand) and i != pair :
-        #         self.gen.append(0)
-        #     else:
-        #         self.gen.append(1)
-
-        # ran = random.randint(1, 100)
-        # old = copy.copy(arr)
-        # new = copy.copy(arr)
-        # if ran < percent:
-        #     ran_mut = random.randint(0, self.quantity - 1)
-        #     if new[ran_mut] == 1:
-        #         new[ran_mut] = 0
-        #     else:
-        #         new[ran_mut] = 1
-        # if self.is_alive(new):
-        #     return new
-        # else:
-        #     return old
-    # def findBest(self):
-    #     # id of max decision
-    #     max_decis = 0
-    #     max_price = 0
-    #     for i in range(0, self.quantity):
-    #         self.arr[i].count_param()
-    #         if self.arr[i].price > max_price:
-    #             max_decis = i
-    #             max_price = self.arr[i].price
-    #             max_size = self.arr[i].size
-    #     return max_decis, max_price, max_size
-
-    # def mutation(self, arr, percent):
-    #     ran = random.randint(1, self.quantity)
-    #     old = copy.copy(arr)
-    #     if ran < percent:
-    #         arr_0 = []
-    #         arr_1 = []
-    #         for i in range(0, self.quantity - 1):
-    #             if arr[i] == 0:
-    #                 arr_0.append(i)
-    #             else:
-    #                 arr_1.append(i)
-    #         if len(arr_1) >= 1:
-    #             ran_0 = random.randint(0, len(arr_0) - 1)
-    #             ran_1 = random.randint(0, len(arr_1) - 1)
-    #         else:
-    #             ran_0 = random.randint(0, len(arr_0) - 1)
-    #             ran_1 = 0
-    #         if len(arr_1) != 0:
-    #             print(arr_1, ran_1)
-    #             print(arr_1[ran_1])
-    #             arr[arr_0[ran_0]] = 1
-    #             arr[arr_1[ran_1]] = 0
-    #             print('arr of pos', arr_1, arr_0)
-    #             print('mutation ', arr_1[ran_1], arr_0[ran_0])
-    #             print(old, arr)
-    #
-    #     return arr
 
 
     def show_full_pop(self):
         for i in self.population:
-            print('pop',i.show_as_norm())
+            print('pop', i.show_as_norm(), i.klika_num)

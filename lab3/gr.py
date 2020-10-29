@@ -3,10 +3,10 @@ import networkx as nx
 from matplotlib import pyplot as plt
 
 
-def create_gr(num_of_nodes,chance):
+def create_gr(num_of_nodes, chance):
 
     G = nx.gnp_random_graph(num_of_nodes, chance, 1, False)
-    nx.draw_random(G, node_color='red', node_size=100, with_labels=True)
+    nx.draw_circular(G, node_color='red', node_size=100, with_labels=True)
     plt.show()
     return G
     #plt.savefig("Graph.png", format="PNG")
