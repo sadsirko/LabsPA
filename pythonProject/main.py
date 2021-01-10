@@ -70,7 +70,8 @@ def turn(first, second):
             arrOfReRoll[i] = int(arrOfReRoll[i])
         rollFive.reroll(arrOfReRoll)
         print(rollFive.arr)
-        print(rollFive.check_roll())
+        locRes = rollFive.check_roll()
+        print(locRes)
         a = 'n'
         if tryRoll2 < tryRoll:
             print('want reroll? y/n')

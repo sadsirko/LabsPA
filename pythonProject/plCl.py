@@ -124,7 +124,28 @@ class CompDecision:
                                     rollLoc.arr[j] = loc2
                                     if tmpRoll > tmp:
                                         arrOfChanges[i][j] += tmpRoll * 1/36
+            print(arrOfChanges)
             return arrOfChanges
+
+        def checkThreeChange():
+            arrOfChanges = []
+            for i in range(len(self.arrRol)):
+                arrOfChanges.append([])
+                for j in range(len(self.arrRol)):
+                    arrOfChanges[i].append(0)
+                    if i < j:
+                        for k in range(1, 6):
+                            for l in range(1, 6):
+                                loc1 = rollLoc.arr[i]
+                                loc2 = rollLoc.arr[j]
+                                rollLoc.arr[i] = k
+                                rollLoc.arr[j] = l
+                                tmpRoll = rollLoc.check_roll()
+                                rollLoc.arr[i] = loc1
+                                rollLoc.arr[j] = loc2
+                                if tmpRoll > tmp:
+                                    arrOfChanges[i][j] += tmpRoll * 1 / 36
+
 
         def maxInDoudleArr(arr):
             #print(arr)
